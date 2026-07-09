@@ -1,0 +1,28 @@
+# Source/build files
+src/
+target/
+*.rs
+Cargo.toml
+Cargo.lock
+coverage.json
+Makefile
+
+# Rust project files
+.git/
+.gitignore
+
+# Development files
+.vscode/
+*.log
+*.tmp
+
+# npm deps
+node_modules/
+
+# Documentation/tests
+README.md
+tests/
+examples/
+
+# OS/editor files
+.DS_Store

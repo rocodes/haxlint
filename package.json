@@ -1,0 +1,29 @@
+{
+  "name": "haxlint",
+  "displayName": "Haxlint (core model compatibility checker)",
+  "version": "0.1.0",
+  "author": {
+    "name": "rocodes"
+  },
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "activationEvents": [
+    "onLanguage:rust"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "rust",
+        "extensions": [".rs"]
+      }
+    ]
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "license": "see LICENSE",
+  "repository": "https://github.com/rocodes/haxlint"
+}
