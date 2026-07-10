@@ -1,15 +1,12 @@
-````markdown
-# haxlint (VS Code Extension)
+# haxlint
 
-A VS Code extension that provides Rust linting to look for use of as-yet unsupported core models, which can't be extracted by Hax.
+Very basic VS Code extension that provides Rust linting to look for use of as-yet unsupported [core models](https://github.com/cryspen/rust-core-models) that can't be extracted by [Hax](https://github.com/cryspen/hax) to warn before beginning long-running verification commands.
 
-Runs as a Language Server Protocol (LSP) server and reports unsupported Rust APIs as VS Code diagnostics (squiggly underlines and entries in the Problems panel).
+## Installation
 
-## Installation (prebuilt)
+Install prebuilt .vsix, build from source, or build debug version and try with vscode extension debugger.
 
-Install prebuilt .vsix, build from source, or build debug version.
-
-## Build debug extension version
+## Build from source
 
 ### Requirements
 
@@ -21,88 +18,13 @@ Install prebuilt .vsix, build from source, or build debug version.
 npm install -g @vscode/vsce
 ```
 
-Clone this project and install dependencies with `cargo install`. Then:
-
-```bash
-cargo build --debug
-```
-
-The binary will be created at
-
-```text
-target/debug/haxlint
-```
-
-Copy the binary into the extension directory:
-
-```bash
-cp target/debug/haxlint path/to/vscode-extensions/haxlint-debug # ie ~/.vscode/extensions/haxlint-debug on your machine
-```
-
-The extension directory should contain:
-
-```text
-haxlint-vscode/
-├── package.json
-├── extension.js
-├── haxlint
-└── coverage.json
-```
-
-`coverage.json` contains the list of (currently) unsupported core model APIs.
+Clone this project and install dependencies with `cargo install`. Then `make debug` (Rust binary only) or `make release` (packaged extension).
 
 ### Debug extension
 
-1. Open the `haxlint-vscode` folder in VS Code.
-2. Open **Run and Debug**.
-3. Select **Run haxlint extension**.
-4. Choose **Run → Start Debugging**.
+Clone this repo, `make debug`. Open VS Code.
+**Run and Debug> Start Debugging**.
 
-A new Extension Development Host window opens.
+## Caveats: Not Fancy
 
-Open a Rust project in that window and edit a `.rs` file. Diagnostics will appear in the editor (underlines), or in  **View → Problems**. Debug output for the extension is visible in
-
-```
-View → Output → Extension Host
-```
-
-## Build VSIX Package
-
-```bash
-cargo build --release
-
-cp target/release/haxlint .
-```
-
-Package the extension:
-
-```bash
-vsce package
-```
-In VSCode, **Extensions** > **Install from VSIX...** or 
-
-```bash
-code --install-extension haxlint-x.y.z.vsix
-```
-
-Haxlint will start automatically when a Rust project is opened.
-
-## Troubleshooting
-
-### Extension starts but no warnings appear
-
-Check:
-
-```
-View → Output → Extension Host
-```
-
-You should see startup and lint messages from haxlint.
-
-### Binary not found
-
-Ensure the executable exists in the extension directory and is executable:
-
-```bash
-chmod +x haxlint
-```
+This does not detect all unsupported use, unsupported patterns (such as fnmut closures), etc, and doesn't handle all edge cases. This code was partially AI-generated.
